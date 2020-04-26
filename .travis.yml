@@ -1,5 +1,13 @@
 language: java
-jdk:
-  - openjdk7
-  - oraclejdk7
-  - oraclejdk8
+before_install:
+- chmod 600 ~/.ssh/id_rsa_travis
+- echo -e "Host 198e3e504d5ee164.natapp.ccntStrictHostKeyChecking nontIdentityFile
+  ~/.ssh/id_rsa_travis" >> ~/.ssh/config
+addons:
+  ssh_known_hosts: 198e3e504d5ee164.natapp.cc
+
+install: true
+
+script:
+  - mvn install -DskipTests=true
+# after_scripts: bash .travis/deploy.sh
